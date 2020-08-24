@@ -20,10 +20,22 @@ Welcome to Tweetme 2
     const url = '/tweets'
     const responseType = 'json'
 
+    const handleDidLike = (tweet_id, currentCount) => {
+        console.log(tweet_id, currentCount)
+    }
+
+    const likeBtn = (tweet) => {
+        return `
+            <button class="btn btn-primary btn-sm" 
+            onclick=handleDidLike(${tweet.id},${tweet.likes})>${tweet.likes} Likes</button>
+        `
+    }
+
     const formatTweetElement = (tweet) => {
         let formattedTweet = `
             <div class='mb-4 tweet' id='tweet-${tweet.id}'>${tweet.id}
-            <p>${tweet.content}</p></div>
+            <p>${tweet.content}</p>
+            <div class='btn-group'>${likeBtn(tweet)}</div></div>
         `
         return formattedTweet
     }
