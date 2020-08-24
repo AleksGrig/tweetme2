@@ -6,9 +6,13 @@ Tweetme 2
 
 
 {% block content %}
-Welcome to Tweetme 2
+<div class="row text-center">
+    <div class="col">
+        <h1>Welcome to Tweetme 2</h1>
+    </div>
+</div>
 
-<div id="tweets">
+<div class="row" id="tweets">
     Loading...
 </div>
 
@@ -33,7 +37,8 @@ Welcome to Tweetme 2
 
     const formatTweetElement = (tweet) => {
         let formattedTweet = `
-            <div class='mb-4 tweet' id='tweet-${tweet.id}'>${tweet.id}
+            <div class='col-12 col-md-10 mx-auto border rounded py-2 mb-4 tweet' 
+            id='tweet-${tweet.id}'>${tweet.id}
             <p>${tweet.content}</p>
             <div class='btn-group'>${likeBtn(tweet)}</div></div>
         `
