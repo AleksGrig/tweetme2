@@ -20,16 +20,22 @@ Welcome to Tweetme 2
     const url = '/tweets'
     const responseType = 'json'
 
+    const formatTweetElement = (tweet) => {
+        let formattedTweet = `
+            <div class='mb-4 tweet' id='tweet-${tweet.id}'>${tweet.id}
+            <p>${tweet.content}</p></div>
+        `
+        return formattedTweet
+    }
+
     xhr.responseType = responseType
     xhr.open(method, url)
     xhr.onload = function() {
         const serverResponse = xhr.response
         let listedItems = serverResponse.response
-        var finalTweetStr = ""
+        let finalTweetStr = ""
         for(let i = 0; i < listedItems.length; i++) {
-            let currentItem =   "<div class='mb-4'><h1>" + listedItems[i].id + "</h1>" +
-                                "<p>" + listedItems[i].content + "</p></div>"
-            finalTweetStr += currentItem  
+            finalTweetStr += formatTweetElement(listedItems[i])  
         }
         tweetsElement.innerHTML = finalTweetStr
         console.log(listedItems)
