@@ -8,7 +8,13 @@ Tweetme 2
 {% block content %}
 Welcome to Tweetme 2
 
+<div id="tweets">
+    Loading...
+</div>
+
 <script>
+    const tweetsElement = document.querySelector('#tweets')
+
     const xhr = new XMLHttpRequest
     const method = 'GET'
     const url = '/tweets'
@@ -18,7 +24,14 @@ Welcome to Tweetme 2
     xhr.open(method, url)
     xhr.onload = function() {
         const serverResponse = xhr.response
-        var listedItems = serverResponse.response
+        let listedItems = serverResponse.response
+        var finalTweetStr = ""
+        for(let i = 0; i < listedItems.length; i++) {
+            let currentItem =   "<div class='mb-4'><h1>" + listedItems[i].id + "</h1>" +
+                                "<p>" + listedItems[i].content + "</p></div>"
+            finalTweetStr += currentItem  
+        }
+        tweetsElement.innerHTML = finalTweetStr
         console.log(listedItems)
     }
     xhr.send()
