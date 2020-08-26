@@ -35,8 +35,11 @@ Tweetme 2
         const method = myForm.getAttribute('method')
         const xhr = new XMLHttpRequest()
         xhr.open(method, url)
+        xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
         xhr.onload = () => {
             const serverResponse = xhr.response
+            console.log(serverResponse)
             const tweetsEl = document.querySelector('#tweets')
             loadTweets(tweetsEl)
         }
@@ -79,7 +82,7 @@ Tweetme 2
                 finalTweetStr += formatTweetElement(listedItems[i])  
             }
             tweetsElement.innerHTML = finalTweetStr
-            console.log(listedItems)
+            // console.log(listedItems)
         }
         xhr.send()
     }
