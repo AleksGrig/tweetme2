@@ -45,7 +45,15 @@ Tweetme 2
                 ogHtml = tweetsContainerElement.innerHTML
                 tweetsContainerElement.innerHTML = newTweetElement + ogHtml
                 myForm.reset()
+            } else if(xhr.status === 400) {
+                const errorJson = xhr.response
+                console.log(errorJson)
+            } else if(xhr.status === 500) {
+                alert("There was server error. Please try later")
             }
+        }
+        xhr.onerror = () => {
+            alert("An error occured. Please try again later")
         }
         xhr.send(myFormData)
     }
