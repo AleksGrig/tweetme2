@@ -29,7 +29,18 @@ Tweetme 2
 <script>
     const handleTweetCreateFormDidSubmit = (event) => {
         event.preventDefault()
-        console.log(event)
+        const myForm = event.target
+        const myFormData = new FormData(myForm)
+        const url = myForm.getAttribute('action')
+        const method = myForm.getAttribute('method')
+        const xhr = new XMLHttpRequest()
+        xhr.open(method, url)
+        xhr.onload = () => {
+            const serverResponse = xhr.response
+            const tweetsEl = document.querySelector('#tweets')
+            loadTweets(tweetsEl)
+        }
+        xhr.send(myFormData)
     }
 
     const handleDidLike = (tweet_id, currentCount) => {
