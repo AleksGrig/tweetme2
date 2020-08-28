@@ -74,12 +74,15 @@ Tweetme 2
                 } else {
                     alert("An error occured. Please try again.")
                 }
+            } else if(xhr.status === 401) {
+                alert("You must login")
+                window.location.href = '/login'
             } else if(xhr.status === 500) {
-                alert("There was server error. Please try later")
+                alert("There was a server error. Please try later.")
             }
         }
         xhr.onerror = () => {
-            alert("An error occured. Please try again later")
+            alert("An error occured. Please try again again")
         }
         xhr.send(myFormData)
     }
