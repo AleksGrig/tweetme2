@@ -117,7 +117,7 @@ Tweetme 2
         xhr.open(method, url)
         xhr.onload = function() {
             const serverResponse = xhr.response
-            let listedItems = serverResponse.response
+            let listedItems = serverResponse
             let finalTweetStr = ""
             for(let i = 0; i < listedItems.length; i++) {
                 finalTweetStr += formatTweetElement(listedItems[i])  
