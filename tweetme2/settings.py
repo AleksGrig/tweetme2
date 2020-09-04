@@ -25,7 +25,8 @@ SECRET_KEY = '-(#!^2%*xxlp_3gmk*uhxf+z!@pq!w-=jtjo(7%hyf5#-+--6k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS=["*"]
 LOGIN_URL = '/login'
 MAX_TWEET_LENGTH = 240
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet']
@@ -137,20 +138,27 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
-CORS_ORIGIN_ALLOW_ALL = True # any website has access to my api
-CORS_URLS_REGEX = r'^/api/.*$'
+CORS_ALLOW_ALL_ORIGINS = True # any website has access to my api
+# CORS_URLS_REGEX = r'^/api/.*$'
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
 DEFAULT_RENDERER_CLASSES = [
     'rest_framework.renderers.JSONRenderer',
 ]
+
+DEFAULT_AUTHENTICATION_CLASSES = [
+    'rest_framework.authentication.SessionAuthentication'
+]
+
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += [
     'rest_framework.renderers.BrowsableAPIRenderer'
-]
+    ]
+    DEFAULT_AUTHENTICATION_CLASSES += [
+        'tweetme2.rest_api.dev.DevAuthentication'
+    ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication'
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
     'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES
 }

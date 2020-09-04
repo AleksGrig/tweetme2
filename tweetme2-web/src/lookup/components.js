@@ -20,7 +20,7 @@ function lookup(method, endpoint, callback, data) {
         jsonData = JSON.stringify(data)
     }
     const xhr = new XMLHttpRequest()
-    const url = `http://localhost:8000/api${endpoint}`
+    const url = `http://localhost:8000/${endpoint}`
     xhr.responseType = 'json'
     const csrftoken = getCookie('csrftoken')
     xhr.open(method, url)
@@ -42,9 +42,9 @@ function lookup(method, endpoint, callback, data) {
 }
 
 export function createTweet(newTweet, callback) {
-    lookup("POST", "/tweets/create/", callback, { content: newTweet })
+    lookup("POST", "api/tweets/create/", callback, { content: newTweet })
 }
 
 export const loadTweets = (callback) => {
-    lookup("GET", "/tweets/", callback)
+    lookup("GET", "api/tweets/", callback)
 }
